@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/vue-material.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css">
+    <link rel="stylesheet" href="css/instapuppy.css">
+  </head>
+
+  <body>
+    <div id="app" v-cloak>
+      <div class="page-container">
+        <md-app md-waterfall md-mode="fixed">
+
+          <!-- toolbar -->
+          <md-app-toolbar class="md-primary">
+            <div class="md-toolbar-section-start">
+              <span><img class="app-icon" src="images/instapuppy-icon.png" /></span>
+              <span class="md-title">{{ title }}</span>
+            </div>
+            <div class="md-toolbar-section-end">
+              <md-button class="md-icon-button">
+                <md-icon>refresh</md-icon>
+              </md-button>
+    
+              <md-button class="md-icon-button">
+                <md-icon>add</md-icon>
+              </md-button>
+            </div>
+          </md-app-toolbar><!-- toolbar -->
+    
+          <!-- app content -->
+          <md-app-content>
+
+            <!-- timeline cards -->
+            <md-card v-if="mode=='loggedin'">
+                <md-card-content>
+                  <b>Dog in hand</b> - <i>3 days ago</i>
+                </md-card-content>
+
+                <md-card-media>
+                  <md-ripple>
+                    <img src="images/dog1.jpg" alt="dog1">
+                  </md-ripple>
+                </md-card-media>
+
+                <md-card-content>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
+                </md-card-content>
+          
+                <md-card-actions>
+                  <md-button class="md-icon-button">
+                    <md-icon>favorite</md-icon>
+                  </md-button>
+          
+                  <md-button class="md-icon-button">
+                    <md-icon>bookmark</md-icon>
+                  </md-button>
+          
+                  <md-button class="md-icon-button">
+                    <md-icon>share</md-icon>
+                  </md-button>
+                </md-card-actions>
+              </md-card>
+
+              <!-- login form -->
+              <md-card v-if="mode=='login'">
+                <md-card-content>
+                  <md-card-content>
+                      <img class="center" src="images/instapuppy-logo.png" alt="logo">
+
+                      <h2>Login</h2>
+                  </md-card-content>
+                  <md-field>
+                    <label>Username</label>
+                    <md-input v-model="login.username" type="email"></md-input>
+                  </md-field>
+              
+                  <md-field>
+                    <label>Password</label>
+                    <md-input v-model="login.password" type="password"></md-input>
+                  </md-field>
+                </md-card-content>
+            
+                <md-card-actions>
+                  <md-button class="md-icon-button">Login</md-button>
+                </md-card-actions>
+              </md-card> <!-- login form -->
+
+              <!-- registration form -->
+              <md-card v-if="mode=='register'">
+                <md-card-content>
+                  <md-card-content>
+                      <img class="center" src="images/instapuppy-logo.png" alt="logo">
+
+                      <h2>Register</h2>
+                  </md-card-content>
+                  <md-field>
+                    <label>Username</label>
+                    <md-input v-model="register.username" type="email"></md-input>
+                  </md-field>
+              
+                  <md-field>
+                    <label>Password</label>
+                    <md-input v-model="register.password1" type="password"></md-input>
+                  </md-field>
+
+                  <md-field>
+                    <label>Repeat Password</label>
+                    <md-input v-model="register.password2" type="password"></md-input>
+                  </md-field>
+                </md-card-content>
+            
+                <md-card-actions>
+                  <md-button class="md-icon-button">Register</md-button>
+                </md-card-actions>
+              </md-card> <!-- registration form -->
+
+
+          </md-app-content> <!-- app content -->
+        </md-app> <!-- app -->
+      </div>
+      
+
+      
+    </div> <!-- #app -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-material@beta"></script>
+    <script src="js/instapuppy.js"></script>
+  </body>
+</html>

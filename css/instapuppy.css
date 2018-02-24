@@ -1,0 +1,24 @@
+[v-cloak] {
+  display: none;
+}
+.app-icon {
+  height: 50px !important;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.md-app {
+  max-height: 100%;
+  border: 1px solid rgba(#000, .12);
+}
+
+ // Demo purposes only
+.md-drawer {
+  width: 230px;
+  max-width: calc(100vw - 125px);
+}
