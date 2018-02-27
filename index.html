@@ -17,15 +17,13 @@
           <!-- toolbar -->
           <md-app-toolbar class="md-primary">
             <div class="md-toolbar-section-start">
-              <span><img class="app-icon" src="images/instapuppy-icon.png" /></span>
-              <span class="md-title">{{ title }}</span>
+              <span v-on:click="onHome"><img class="app-icon" src="images/instapuppy-icon.png" /></span>
+              <span v-on:click="onHome" class="md-title">{{ title }}</span>
             </div>
             <div class="md-toolbar-section-end">
-              <md-button class="md-icon-button">
-                <md-icon>refresh</md-icon>
-              </md-button>
+              <span>{{ userDisplayName }} </span>
     
-              <md-button class="md-icon-button">
+              <md-button v-if="userDisplayName" class="md-icon-button" v-on:click="mode='upload'">
                 <md-icon>add</md-icon>
               </md-button>
             </div>
@@ -82,11 +80,16 @@
                     <label>Password</label>
                     <md-input v-model="login.password" type="password"></md-input>
                   </md-field>
+
+                  <div>
+                    Don't have an account yet? <a href="#" v-on:click="mode = 'register'">Register here</a>
+                  </div>
                 </md-card-content>
             
                 <md-card-actions>
-                  <md-button class="md-icon-button">Login</md-button>
+                  <md-button class="md-icon-button" v-on:click="onLogin">Login</md-button>
                 </md-card-actions>
+
               </md-card> <!-- login form -->
 
               <!-- registration form -->
@@ -112,23 +115,53 @@
                     <md-input v-model="register.password2" type="password"></md-input>
                   </md-field>
                 </md-card-content>
+                
+                <div>
+                  Already have an account? <a href="#" v-on:click="mode = 'login'">Login here</a>
+                </div>
             
                 <md-card-actions>
                   <md-button class="md-icon-button">Register</md-button>
                 </md-card-actions>
               </md-card> <!-- registration form -->
 
+              <!-- upload form -->
+              <md-card v-if="mode=='upload'">
+                <md-card-content>
+                  <md-card-content>
+                    <h2>Upload</h2>
+                  </md-card-content>
+                  <md-field>
+                    <label>Name</label>
+                    <md-input v-model="upload.name" type="email"></md-input>
+                  </md-field>
+                  <md-field>
+                    <label>Description</label>
+                    <md-input v-model="upload.description" type="email"></md-input>
+                  </md-field>
+                  <md-field>
+                    <label>Select file</label>
+                    <md-file v-model="upload.file" accept="image/*" />
+                  </md-field>
+                  <md-card-actions>
+                    <md-button class="md-icon-button">Upload</md-button>
+                  </md-card-actions>
+                </md-card-content>
+              </md-card> <!-- upload form -->
+
+            <md-snackbar :md-active.sync="snackbar" md-persistent>
+              <span>{{ snackbarMessage }}</span>
+            </md-snackbar>
 
           </md-app-content> <!-- app content -->
         </md-app> <!-- app -->
       </div>
       
-
-      
     </div> <!-- #app -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vue-material@beta"></script>
+    <script src="js/lib.js"></script>
     <script src="js/instapuppy.js"></script>
   </body>
 </html>
