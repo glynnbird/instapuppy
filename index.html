@@ -33,121 +33,122 @@
           <md-app-content>
 
             <!-- timeline cards -->
-            <md-card v-if="mode=='loggedin'">
-                <md-card-content>
-                  <b>Dog in hand</b> - <i>3 days ago</i>
-                </md-card-content>
-
-                <md-card-media>
-                  <md-ripple>
-                    <img src="images/dog1.jpg" alt="dog1">
-                  </md-ripple>
-                </md-card-media>
-
-                <md-card-content>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
-                </md-card-content>
-          
-                <md-card-actions>
-                  <md-button class="md-icon-button">
-                    <md-icon>favorite</md-icon>
-                  </md-button>
-          
-                  <md-button class="md-icon-button">
-                    <md-icon>bookmark</md-icon>
-                  </md-button>
-          
-                  <md-button class="md-icon-button">
-                    <md-icon>share</md-icon>
-                  </md-button>
-                </md-card-actions>
-              </md-card>
-
-              <!-- login form -->
-              <md-card v-if="mode=='login'">
-                <md-card-content>
-                  <md-card-content>
-                      <img class="center" src="images/instapuppy-logo.png" alt="logo">
-
-                      <h2>Login</h2>
-                  </md-card-content>
-                  <md-field>
-                    <label>Username</label>
-                    <md-input v-model="login.username" type="email"></md-input>
-                  </md-field>
+            <md-card v-if="mode=='loggedin'" v-for="doc in docs">
               
-                  <md-field>
-                    <label>Password</label>
-                    <md-input v-model="login.password" type="password"></md-input>
-                  </md-field>
+              <md-card-content>
+                <b>{{ doc.name }}</b> - <i>{{ doc.date }}</i>
+              </md-card-content>
 
-                  <div>
-                    Don't have an account yet? <a href="#" v-on:click="mode = 'register'">Register here</a>
-                  </div>
+              <md-card-media>
+                <md-ripple>
+                  <img :src="doc.image" :alt="doc.name">
+                </md-ripple>
+              </md-card-media>
+
+              <md-card-content>
+                {{ doc.descr }}
+              </md-card-content>
+        
+              <md-card-actions>
+                <md-button class="md-icon-button">
+                  <md-icon>favorite</md-icon>
+                </md-button>
+        
+                <md-button class="md-icon-button">
+                  <md-icon>bookmark</md-icon>
+                </md-button>
+        
+                <md-button class="md-icon-button">
+                  <md-icon>share</md-icon>
+                </md-button>
+              </md-card-actions>
+            </md-card>
+
+            <!-- login form -->
+            <md-card v-if="mode=='login'">
+              <md-card-content>
+                <md-card-content>
+                    <img class="center" src="images/instapuppy-logo.png" alt="logo">
+
+                    <h2>Login</h2>
                 </md-card-content>
+                <md-field>
+                  <label>Username</label>
+                  <md-input v-model="login.username" type="email"></md-input>
+                </md-field>
             
-                <md-card-actions>
-                  <md-button class="md-icon-button" v-on:click="onLogin">Login</md-button>
-                </md-card-actions>
+                <md-field>
+                  <label>Password</label>
+                  <md-input v-model="login.password" type="password"></md-input>
+                </md-field>
 
-              </md-card> <!-- login form -->
-
-              <!-- registration form -->
-              <md-card v-if="mode=='register'">
-                <md-card-content>
-                  <md-card-content>
-                      <img class="center" src="images/instapuppy-logo.png" alt="logo">
-
-                      <h2>Register</h2>
-                  </md-card-content>
-                  <md-field>
-                    <label>Username</label>
-                    <md-input v-model="register.username" type="email"></md-input>
-                  </md-field>
-              
-                  <md-field>
-                    <label>Password</label>
-                    <md-input v-model="register.password1" type="password"></md-input>
-                  </md-field>
-
-                  <md-field>
-                    <label>Repeat Password</label>
-                    <md-input v-model="register.password2" type="password"></md-input>
-                  </md-field>
-                </md-card-content>
-                
                 <div>
-                  Already have an account? <a href="#" v-on:click="mode = 'login'">Login here</a>
+                  Don't have an account yet? <a href="#" v-on:click="mode = 'register'">Register here</a>
                 </div>
-            
-                <md-card-actions>
-                  <md-button class="md-icon-button">Register</md-button>
-                </md-card-actions>
-              </md-card> <!-- registration form -->
+              </md-card-content>
+          
+              <md-card-actions>
+                <md-button class="md-icon-button" v-on:click="onLogin">Login</md-button>
+              </md-card-actions>
 
-              <!-- upload form -->
-              <md-card v-if="mode=='upload'">
+            </md-card> <!-- login form -->
+
+            <!-- registration form -->
+            <md-card v-if="mode=='register'">
+              <md-card-content>
                 <md-card-content>
-                  <md-card-content>
-                    <h2>Upload</h2>
-                  </md-card-content>
-                  <md-field>
-                    <label>Name</label>
-                    <md-input v-model="upload.name" type="email"></md-input>
-                  </md-field>
-                  <md-field>
-                    <label>Description</label>
-                    <md-input v-model="upload.description" type="email"></md-input>
-                  </md-field>
-                  <md-field>
-                    <label>Select file</label>
-                    <md-file v-model="upload.file" accept="image/*" />
-                  </md-field>
-                  <md-card-actions>
-                    <md-button class="md-icon-button">Upload</md-button>
-                  </md-card-actions>
+                    <img class="center" src="images/instapuppy-logo.png" alt="logo">
+
+                    <h2>Register</h2>
                 </md-card-content>
-              </md-card> <!-- upload form -->
+                <md-field>
+                  <label>Username</label>
+                  <md-input v-model="register.username" type="email"></md-input>
+                </md-field>
+            
+                <md-field>
+                  <label>Password</label>
+                  <md-input v-model="register.password1" type="password"></md-input>
+                </md-field>
+
+                <md-field>
+                  <label>Repeat Password</label>
+                  <md-input v-model="register.password2" type="password"></md-input>
+                </md-field>
+              </md-card-content>
+              
+              <div>
+                Already have an account? <a href="#" v-on:click="mode = 'login'">Login here</a>
+              </div>
+          
+              <md-card-actions>
+                <md-button class="md-icon-button">Register</md-button>
+              </md-card-actions>
+            </md-card> <!-- registration form -->
+
+            <!-- upload form -->
+            <md-card v-if="mode=='upload'">
+              <md-card-content>
+                <md-card-content>
+                  <h2>Upload</h2>
+                </md-card-content>
+                <md-field>
+                  <label>Name</label>
+                  <md-input v-model="upload.name" type="email"></md-input>
+                </md-field>
+                <md-field>
+                  <label>Description</label>
+                  <md-input v-model="upload.description" type="email"></md-input>
+                </md-field>
+                <md-field>
+                  <label>Select file</label>
+                  <md-file v-model="upload.file" accept="image/*" />
+                </md-field>
+                <md-card-actions>
+                  <md-button class="md-icon-button">Upload</md-button>
+                </md-card-actions>
+              </md-card-content>
+            </md-card> <!-- upload form -->
 
             <md-snackbar :md-active.sync="snackbar" md-persistent>
               <span>{{ snackbarMessage }}</span>

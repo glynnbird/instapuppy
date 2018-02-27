@@ -6,6 +6,7 @@ var app = new Vue({
   data: {
     cookie: '',
     userDisplayName: '',
+    docs: [],
     mode: '',
     snackbar: false,
     snackbarMessage: '',
@@ -36,6 +37,7 @@ var app = new Vue({
         if (!err) {
           this.mode = 'loggedin';
           this.userDisplayName = data.userDisplayName;
+          this.loadHome()
         } else {
           this.mode = 'login'
         }
@@ -63,7 +65,19 @@ var app = new Vue({
         app.mode = 'loggedin'
       } else {
         app.mode = 'login'
+        this.loadHome()
       }
+    },
+    loadHome: function() {
+      console.log('loadhome')
+      ajax('mydocs', { cookie: this.cookie }, (err,data) => {
+        if (!err) {
+          app.docs = []
+          for(var i in data.rows) {
+            app.docs.push(data.rows[i].doc)
+          }
+        } 
+      })
     }
   }
 
