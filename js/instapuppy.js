@@ -54,11 +54,19 @@ var app = new Vue({
           app.cookie = data.cookie
           app.userDisplayName = data.userDisplayName
           app.mode = 'loggedin'
+          app.loadHome()
         } else {
           app.login.snackbarMessage = 'Invalid username or password'
           app.login.snackbar = true
         }
       })
+    },
+    onLogout: function() {
+      clearCookie('instapuppytoken')
+      this.mode='login'
+      this.docs = []
+      this.cookie = ''
+      this.userDisplayName = ''
     },
     onHome: function() {
       if (this.cookie) {

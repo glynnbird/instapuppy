@@ -21,7 +21,7 @@
               <span v-on:click="onHome" class="md-title">{{ title }}</span>
             </div>
             <div class="md-toolbar-section-end">
-              <span>{{ userDisplayName }} </span>
+              <span v-on:click="mode='profile'">{{ userDisplayName }} </span>
     
               <md-button v-if="userDisplayName" class="md-icon-button" v-on:click="mode='upload'">
                 <md-icon>add</md-icon>
@@ -68,9 +68,7 @@
             <md-card v-if="mode=='login'">
               <md-card-content>
                 <md-card-content>
-                    <img class="center" src="images/instapuppy-logo.png" alt="logo">
-
-                    <h2>Login</h2>
+                  <h2>Login</h2>
                 </md-card-content>
                 <md-field>
                   <label>Username</label>
@@ -149,6 +147,19 @@
                 </md-card-actions>
               </md-card-content>
             </md-card> <!-- upload form -->
+
+            <!-- profile panel -->
+            <md-card v-if="mode=='profile'">
+              <md-card-content>
+                <md-card-content>
+                  <h2>Logged in as</h2>
+                  {{ userDisplayName }}
+                </md-card-content>
+                <md-card-actions>
+                  <md-button class="md-icon-button" v-on:click="onLogout">Logout</md-button>
+                </md-card-actions>
+              </md-card-content>
+            </md-card> <!-- profile panel -->
 
             <md-snackbar :md-active.sync="snackbar" md-persistent>
               <span>{{ snackbarMessage }}</span>
