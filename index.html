@@ -129,6 +129,9 @@
               <md-card-content>
                 <md-card-content>
                   <h2>Upload</h2>
+                  <div id="drop_zone" ondrop="drop_handler(event);" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)">
+                    <strong>Drop file here...</strong>
+                  </div>
                 </md-card-content>
                 <md-field>
                   <label>Name</label>

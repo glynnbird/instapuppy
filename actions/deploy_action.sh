@@ -16,12 +16,7 @@ echo "deploy_action $FILENAME"
 cp "$FILENAME" index.js
 zip -r "$ZIPFILENAME" index.js ./lib/*
 echo "$P"
-if [ "$ACTIONNAME" == "upload" ] 
-then
-  bx wsk action update "instapuppy/$ACTIONNAME" --kind nodejs:6 "$ZIPFILENAME" --web raw
-else
-  bx wsk action update "instapuppy/$ACTIONNAME" --kind nodejs:6 "$ZIPFILENAME" --web true
-fi
+bx wsk action update "instapuppy/$ACTIONNAME" --kind nodejs:6 "$ZIPFILENAME" --web true
 rm "$ZIPFILENAME"
 rm index.js
 exit 0
