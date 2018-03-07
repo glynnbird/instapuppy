@@ -25,11 +25,27 @@ var upload = function(f, content_type, url, callback) {
   var reader = new FileReader();
   reader.onload = function(event) {
     $.ajax({
+      xhr: function()
+      {
+        var xhr = new window.XMLHttpRequest();
+        //Upload progress
+        xhr.upload.addEventListener("progress", function(evt){
+          if (evt.lengthComputable) {
+            var percentComplete = 100 * evt.loaded / evt.total;
+            //Do something with upload progress
+            app.upload.progress = percentComplete
+          }
+        }, false);
+        return xhr;
+      },
       type: 'PUT',
       url: url,
       data: reader.result,
       contentType: content_type,
       processData: false,
+      progress: function(e) {
+        console.log(evt.loaded / evt.total * 100)
+      },
       error: function(e) {
         callback(e, null);
       },
@@ -102,7 +118,8 @@ var app = new Vue({
     upload: {
       key: '',
       name:'',
-      descr:''
+      descr:'',
+      progress:0
     },
     menuVisible: false,
     title: 'InstaPuppy'
@@ -188,6 +205,7 @@ var app = new Vue({
       app.upload.name = ''
       app.upload.descr = ''
       app.upload.image = ''
+      app.upload.progress = 0
       app.mode = 'loggedin'
       ajax('save', obj, (err, data) => {
         if (!err) {

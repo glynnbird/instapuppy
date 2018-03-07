@@ -127,28 +127,30 @@
             <!-- upload form -->
             <md-card v-if="mode=='upload'">
               <md-card-content>
-                <md-card-content>
-                  <h2>Upload</h2>
-                  <div id="drop_zone" ondrop="drop_handler(event);" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)">
-                    <strong>Drop file here...</strong>
-                  </div>
-                </md-card-content>
+                <h2>Upload</h2>
+                <div id="drop_zone" ondrop="drop_handler(event);" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)">
+                  <strong>Drop file here...</strong>
+                </div>
+                <div>
+                  <br>
+                  <md-progress-bar v-if="upload.progress >0 && upload.progress < 100" md-mode="determinate" :md-value="upload.progress"></md-progress-bar>
+                </div>
                 <md-field>
-                  <label>Key</label>
-                  <md-input v-model="upload.key" type="string" readonly></md-input>
-                </md-field>
-                <md-field>
-                  <label>Name</label>
-                  <md-input v-model="upload.name" type="email"></md-input>
-                </md-field>
-                <md-field>
-                  <label>Description</label>
-                  <md-input v-model="upload.description" type="email"></md-input>
-                </md-field>
-                <md-card-actions>
-                  <md-button class="md-icon-button" :disabled="!(upload.key && upload.name)" v-on:click="onUpload">Upload</md-button>
-                </md-card-actions>
+                    <label>Key</label>
+                    <md-input v-model="upload.key" type="string" readonly></md-input>
+                  </md-field>
+                  <md-field>
+                    <label>Name</label>
+                    <md-input v-model="upload.name" type="email"></md-input>
+                  </md-field>
+                  <md-field>
+                    <label>Description</label>
+                    <md-input v-model="upload.description" type="email"></md-input>
+                  </md-field>  
               </md-card-content>
+              <md-card-actions>
+                <md-button class="md-icon-button" :disabled="!(upload.key && upload.name)" v-on:click="onUpload">Upload</md-button>
+              </md-card-actions>
             </md-card> <!-- upload form -->
 
             <!-- profile panel -->
