@@ -14,6 +14,7 @@ var getPresignedURL = function(content_type, callback) {
     },
     success: function(d) {
       console.log('ajax success', d)
+      app.upload.key = d.key
       callback(null, d)
     }
   });
@@ -33,6 +34,7 @@ var upload = function(f, content_type, url, callback) {
         callback(e, null);
       },
       success: function(d) {
+        console.log('upload complete!')
         callback(null, d)
       }
     });
@@ -98,12 +100,22 @@ var app = new Vue({
       password:''
     },
     upload: {
+      key: '',
       name:'',
-      descr:'',
-      file:null
+      descr:''
     },
     menuVisible: false,
     title: 'InstaPuppy'
+  },
+  computed: {
+    processedDocs : function() {
+      var pDocs = []
+      for(var i in this.docs) {
+        pDocs[i] = this.docs[i]
+        pDocs[i].url = apibase + 'download?id=' + this.docs[i].image
+      }
+      return pDocs
+    }
   },
   mounted: function() {
     var jar = getCookies();
@@ -162,6 +174,24 @@ var app = new Vue({
           for(var i in data.rows) {
             app.docs.push(data.rows[i].doc)
           }
+        } 
+      })
+    },
+    onUpload: function() {
+      console.log(app.upload)
+      var obj = {
+        name: app.upload.name,
+        descr: app.upload.descr,
+        image: app.upload.key,
+        cookie: this.cookie
+      }
+      app.upload.name = ''
+      app.upload.descr = ''
+      app.upload.image = ''
+      app.mode = 'loggedin'
+      ajax('save', obj, (err, data) => {
+        if (!err) {
+          app.docs.unshift(obj)
         } 
       })
     }

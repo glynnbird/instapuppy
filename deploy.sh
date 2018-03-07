@@ -21,3 +21,5 @@ bx wsk api create /instapuppy /alldocs post instapuppy/alldocs --response-type h
 bx wsk api create /instapuppy /mydocs post instapuppy/mydocs --response-type http
 bx wsk api create /instapuppy /userdocs post instapuppy/userdocs --response-type http
 bx wsk api create /instapuppy /upload post instapuppy/upload --response-type http
+bx wsk api create /instapuppy /save post instapuppy/save --response-type http
+bx wsk api create /instapuppy /download get instapuppy/download --response-type http

@@ -24,7 +24,8 @@ const main = function(msg) {
   // pre-sign the request
   var extension = msg.content_type.split('/')[1] 
   var expires = '' + Math.floor(((new Date()).getTime()/1000) + 60)
-  var path = '/' + msg.bucket + '/' + uuid() + '.' + extension
+  var id = uuid()
+  var path = '/' + msg.bucket + '/' + id + '.' + extension
   var hmac = crypto.createHmac('sha1', msg.secret_key);
   hmac.update('PUT\n' + '\n' + msg.content_type +  '\n' + expires + '\n' + path)
   var signature = hmac.digest('base64')
@@ -32,7 +33,7 @@ const main = function(msg) {
   // generate URL
   var params = 'AWSAccessKeyId=' + encodeURIComponent(msg.access_key) + '&Signature=' + encodeURIComponent(signature) + '&Expires=' + encodeURIComponent(expires)
   var request_url = msg.endpoint + path + '?' + params
-  return utils.reply({ url: request_url, key: uuid() + '.' + extension })
+  return utils.reply({ url: request_url, key: id + '.' + extension })
 }
 
 exports.main = main

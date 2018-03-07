@@ -30,6 +30,13 @@ var reply = function(data, contentType) {
   };
 };
 
+var redirect = function(url) {
+  return {
+    statusCode: 302,
+    headers: { 'Location': url }
+  };
+};
+
 var error = function(data) {
   return {
     statusCode: 400,
@@ -42,6 +49,7 @@ module.exports = {
   allowParams: allowParams,
   removeOpenWhiskParams: removeOpenWhiskParams,
   reply: reply,
-  error: error
+  error: error,
+  redirect: redirect
 };
 

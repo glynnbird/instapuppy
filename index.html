@@ -33,7 +33,7 @@
           <md-app-content>
 
             <!-- timeline cards -->
-            <md-card v-if="mode=='loggedin'" v-for="doc in docs">
+            <md-card v-if="mode=='loggedin'" v-for="doc in processedDocs">
               
               <md-card-content>
                 <b>{{ doc.name }}</b> - <i>{{ doc.date }}</i>
@@ -41,7 +41,7 @@
 
               <md-card-media>
                 <md-ripple>
-                  <img :src="doc.image" :alt="doc.name">
+                  <img :src="doc.url" :alt="doc.name">
                 </md-ripple>
               </md-card-media>
 
@@ -134,6 +134,10 @@
                   </div>
                 </md-card-content>
                 <md-field>
+                  <label>Key</label>
+                  <md-input v-model="upload.key" type="string" readonly></md-input>
+                </md-field>
+                <md-field>
                   <label>Name</label>
                   <md-input v-model="upload.name" type="email"></md-input>
                 </md-field>
@@ -141,12 +145,8 @@
                   <label>Description</label>
                   <md-input v-model="upload.description" type="email"></md-input>
                 </md-field>
-                <md-field>
-                  <label>Select file</label>
-                  <md-file v-model="upload.file" accept="image/*" />
-                </md-field>
                 <md-card-actions>
-                  <md-button class="md-icon-button">Upload</md-button>
+                  <md-button class="md-icon-button" :disabled="!(upload.key && upload.name)" v-on:click="onUpload">Upload</md-button>
                 </md-card-actions>
               </md-card-content>
             </md-card> <!-- upload form -->
