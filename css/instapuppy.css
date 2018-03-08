@@ -22,6 +22,14 @@
   max-width: calc(100vw - 125px);
 }
 
+.md-card {
+  margin-top:25px
+}
+
+.md-content {
+  background-color: #ddd !important
+}
+
 #drop_zone {
   width:50%;
   height:200px;
