@@ -2,6 +2,9 @@
 Vue.use(VueMaterial.default)
 
 var getPresignedURL = function(content_type, callback) {
+  app.upload.complete = false
+  app.upload.key = ''
+  app.upload.progress = 0
   $.ajax({
     type: 'POST',
     url: apibase + 'upload',
@@ -51,6 +54,7 @@ var upload = function(f, content_type, url, callback) {
       },
       success: function(d) {
         console.log('upload complete!')
+        app.upload.complete = true
         callback(null, d)
       }
     });
@@ -119,7 +123,8 @@ var app = new Vue({
       key: '',
       name:'',
       descr:'',
-      progress:0
+      progress:0,
+      complete: false
     },
     menuVisible: false,
     title: 'InstaPuppy'
@@ -206,6 +211,7 @@ var app = new Vue({
       app.upload.descr = ''
       app.upload.image = ''
       app.upload.progress = 0
+      app.upload.complete = false
       app.mode = 'loggedin'
       ajax('save', obj, (err, data) => {
         if (!err) {

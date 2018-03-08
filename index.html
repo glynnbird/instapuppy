@@ -138,6 +138,8 @@
                 <md-field>
                     <label>Key</label>
                     <md-input v-model="upload.key" type="string" readonly></md-input>
+                    <md-icon v-if="upload.key && !upload.complete">cloud_upload</md-icon>
+                    <md-icon v-if="upload.complete">check_circle</md-icon>
                   </md-field>
                   <md-field>
                     <label>Name</label>
@@ -149,7 +151,7 @@
                   </md-field>  
               </md-card-content>
               <md-card-actions>
-                <md-button class="md-icon-button" :disabled="!(upload.key && upload.name)" v-on:click="onUpload">Upload</md-button>
+                <md-button class="md-icon-button" :disabled="!upload.complete || !upload.name" v-on:click="onUpload">Upload</md-button>
               </md-card-actions>
             </md-card> <!-- upload form -->
 
