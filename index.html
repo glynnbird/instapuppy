@@ -151,7 +151,7 @@
                   </md-field>  
               </md-card-content>
               <md-card-actions>
-                <md-button class="md-icon-button" :disabled="!upload.complete || !upload.name" v-on:click="onUpload">Upload</md-button>
+                <md-button :disabled="!upload.complete || !upload.name" v-on:click="onUpload">Upload</md-button>
               </md-card-actions>
             </md-card> <!-- upload form -->
 
@@ -163,7 +163,7 @@
                   {{ userDisplayName }}
                 </md-card-content>
                 <md-card-actions>
-                  <md-button class="md-icon-button" v-on:click="onLogout">Logout</md-button>
+                  <md-button v-on:click="onLogout">Logout</md-button>
                 </md-card-actions>
               </md-card-content>
             </md-card> <!-- profile panel -->
