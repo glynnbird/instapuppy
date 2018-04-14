@@ -165,6 +165,8 @@ var app = new Vue({
           document.cookie = 'instapuppytoken=' + data.cookie;
           app.cookie = data.cookie
           app.userDisplayName = data.userDisplayName
+          app.login.username = ''
+          app.login.password = ''
           app.mode = 'loggedin'
           app.loadHome()
         } else {
