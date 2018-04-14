@@ -94,11 +94,9 @@
             <!-- registration form -->
             <md-card v-if="mode=='register'">
               <md-card-content>
-                <md-card-content>
-                    <img class="center" src="images/instapuppy-logo.png" alt="logo">
+                
+                  <h2>Register</h2>
 
-                    <h2>Register</h2>
-                </md-card-content>
                 <md-field>
                   <label>Username</label>
                   <md-input v-model="register.username" type="email"></md-input>
@@ -115,12 +113,12 @@
                 </md-field>
               </md-card-content>
               
-              <div>
+              <md-card-content>
                 Already have an account? <a href="#" v-on:click="mode = 'login'">Login here</a>
-              </div>
+              </md-card-content>
           
               <md-card-actions>
-                <md-button class="md-icon-button">Register</md-button>
+                <md-button>Register</md-button>
               </md-card-actions>
             </md-card> <!-- registration form -->
 
